@@ -209,6 +209,7 @@ set(SCHEDULER_SRC
 set(AGENT_SRC
   ${AGENT_SRC}
   slave/constants.cpp
+  slave/gc.cpp
   slave/http.cpp
   slave/metrics.cpp
   slave/paths.cpp
@@ -223,7 +224,6 @@ set(AGENT_SRC
 if (NOT WIN32)
   set(AGENT_SRC
     ${AGENT_SRC}
-    slave/gc.cpp
     slave/flags.cpp
     slave/monitor.cpp
     slave/slave.cpp
