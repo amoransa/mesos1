@@ -67,9 +67,9 @@ void read(
     if (flags == NONE) {
       length = ::read(fd, data, size);
     } else { // PEEK.
-      // In case 'fd' is not a socket ::recv() will fail with ENOTSOCK and the
+      // In case 'fd' is not a socket os::recv() will fail with ENOTSOCK and the
       // error will be propagted out.
-      length = ::recv(fd, data, size, MSG_PEEK);
+      length = os::recv(fd, data, size, MSG_PEEK);
     }
 
     if (length < 0) {
