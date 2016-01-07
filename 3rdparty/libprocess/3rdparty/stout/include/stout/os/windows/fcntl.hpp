@@ -21,25 +21,25 @@ namespace os {
 
 inline Try<Nothing> cloexec(int fd)
 {
-  UNIMPLEMENTED;
+  return WindowsError(ERROR_NOT_SUPPORTED);
 }
 
 
 inline Try<bool> isCloexec(int fd)
 {
-  UNIMPLEMENTED;
+  return WindowsError(ERROR_NOT_SUPPORTED);
 }
 
 
 inline Try<Nothing> nonblock(int fd)
 {
-  UNIMPLEMENTED;
+  return WindowsError(ERROR_NOT_SUPPORTED);
 }
 
 
 inline Try<bool> isNonblock(int fd)
 {
-  UNIMPLEMENTED;
+  return WindowsError(ERROR_NOT_SUPPORTED);
 }
 
 } // namespace os {
