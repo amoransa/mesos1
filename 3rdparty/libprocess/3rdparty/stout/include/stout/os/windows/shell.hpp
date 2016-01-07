@@ -29,7 +29,7 @@ namespace os {
 template <typename... T>
 Try<std::string> shell(const std::string& fmt, const T&... t)
 {
-  UNIMPLEMENTED;
+  return "";
 }
 
 // Canonical constants used as platform-dependent args to `exec` calls.
