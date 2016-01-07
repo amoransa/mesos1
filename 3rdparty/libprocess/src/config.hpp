@@ -54,6 +54,8 @@
 #endif /* __FreeBSD__ */
 
 #ifdef __WINDOWS__
+#ifdef _WINDOWS_
+typedef int socklen_t
 #ifndef MSG_NOSIGNAL
 #define MSG_NOSIGNAL 0
 #endif
