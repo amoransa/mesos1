@@ -10,7 +10,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License
 
-#include <netinet/tcp.h>
 
 #include <process/io.hpp>
 #include <process/network.hpp>
@@ -18,6 +17,7 @@
 
 #include <stout/os/sendfile.hpp>
 #include <stout/os/strerror.hpp>
+#include <stout/os.hpp>
 
 #include "config.hpp"
 #include "poll_socket.hpp"
@@ -70,7 +70,7 @@ Future<Socket> accept(int fd)
 
   // Turn off Nagle (TCP_NODELAY) so pipelined requests don't wait.
   int on = 1;
-  if (setsockopt(s, SOL_TCP, TCP_NODELAY, &on, sizeof(on)) < 0) {
+  if (os::setsockopt(s, SOL_TCP, TCP_NODELAY, &on, sizeof(on)) < 0) {
     const string error = os::strerror(errno);
     VLOG(1) << "Failed to turn off the Nagle algorithm: " << error;
     os::close(s);
@@ -105,7 +105,7 @@ Future<Nothing> connect(const Socket& socket)
   socklen_t optlen = sizeof(opt);
   int s = socket.get();
 
-  if (getsockopt(s, SOL_SOCKET, SO_ERROR, &opt, &optlen) < 0 || opt != 0) {
+  if (os::getsockopt(s, SOL_SOCKET, SO_ERROR, &opt, &optlen) < 0 || opt != 0) {
     // Connect failure.
     VLOG(1) << "Socket error while connecting";
     return Failure("Socket error while connecting");
