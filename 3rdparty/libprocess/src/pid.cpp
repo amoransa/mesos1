@@ -11,12 +11,12 @@
 // limitations under the License
 
 #include <errno.h>
-#include <netdb.h>
+//#include <netdb.h>
 #include <stdint.h>
 #include <stdio.h>
 #include <string.h>
 
-#include <arpa/inet.h>
+//#include <arpa/inet.h>
 
 #include <glog/logging.h>
 
