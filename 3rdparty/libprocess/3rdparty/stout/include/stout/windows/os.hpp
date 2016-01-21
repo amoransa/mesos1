@@ -38,6 +38,10 @@
 #include <stout/os/raw/environment.hpp>
 
 
+#define WNOHANG 0
+#define hstrerror() ("")
+#define SIGPIPE 100
+
 namespace os {
 
   inline int pagesize()
@@ -47,17 +51,21 @@ namespace os {
     return si.dwPageSize;
   };
 
-/*
+  inline long cpu()
+  {
+    return 4;
+  };
+
 // Sets the value associated with the specified key in the set of
 // environment variables.
 inline void setenv(const std::string& key,
                    const std::string& value,
                    bool overwrite = true)
 {
-  UNIMPLEMENTED;
+
 }
 
-
+/*
 // Unsets the value associated with the specified key in the set of
 // environment variables.
 inline void unsetenv(const std::string& key)
@@ -143,26 +151,26 @@ inline Result<std::string> user(Option<uid_t> uid = None())
 {
   UNIMPLEMENTED;
 }
-
+// Returns the list of files that match the given (shell) pattern.
+inline Try<std::list<std::string>> glob(const std::string& pattern)
+{
+UNIMPLEMENTED;
+}
+*/
 
 // Suspends execution for the given duration.
 inline Try<Nothing> sleep(const Duration& duration)
 {
-  UNIMPLEMENTED;
+  return Nothing();
 }
 
 
-// Returns the list of files that match the given (shell) pattern.
-inline Try<std::list<std::string>> glob(const std::string& pattern)
-{
-  UNIMPLEMENTED;
-}
 
 
 // Returns the total number of cpus (cores).
 inline Try<long> cpus()
 {
-  UNIMPLEMENTED;
+  return 4;
 }
 
 
@@ -172,38 +180,29 @@ inline Try<long> cpus()
 // uptime(1).
 inline Try<Load> loadavg()
 {
-  UNIMPLEMENTED;
+  return Load();
 }
 
 
 // Returns the total size of main and free memory.
 inline Try<Memory> memory()
 {
-  UNIMPLEMENTED;
+  return Memory();
 }
 
 
 // Return the system information.
 inline Try<UTSInfo> uname()
 {
-  UNIMPLEMENTED;
+  return UTSInfo();
 }
 
 
 inline Try<std::list<Process>> processes()
 {
-  UNIMPLEMENTED;
+  return std::list<Process>();
 }
 
-
-// Overload of os::pids for filtering by groups and sessions.
-// A group / session id of 0 will fitler on the group / session ID
-// of the calling process.
-inline Try<std::set<pid_t>> pids(Option<pid_t> group, Option<pid_t> session)
-{
-  UNIMPLEMENTED;
-}
-*/
 inline size_t recv(int sockfd, void *buf, size_t len, int flags) {
   return ::recv(sockfd, (char*)buf, len, flags);
 }
@@ -218,6 +217,44 @@ inline int getsockopt(int socket, int level, int option_name,
   return ::getsockopt(socket, level, option_name, (char*)option_value, option_len);
 }
 
+// Looks in the environment variables for the specified key and
+// returns a string representation of its value. If no environment
+// variable matching key is found, None() is returned.
+inline Option<std::string> getenv(const std::string& key)
+{
+  char* value = ::getenv(key.c_str());
+
+  if (value == NULL) {
+    return None();
+  }
+
+  return std::string(value);
+}
+
+#ifdef _WINDOWS_
+
+inline struct tm* gmtime_r(const time_t *timep, struct tm *result)
+{
+  if (gmtime_s(result, timep))
+  {
+    return result;
+  }
+
+  return NULL;
+}
+
+#else // ​_WINDOWS_
+
+inline auto gmtime_r(const time_t *timep, struct tm *result) {
+  return ::gmtime_r(timep, result);
+}
+
+#endif // ​_WINDOWS_
+
+inline pid_t waitpid(pid_t pid, int *status, int options)
+{
+    return 0;
+}
 } // namespace os {
 
 
