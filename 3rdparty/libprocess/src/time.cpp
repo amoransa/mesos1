@@ -15,30 +15,7 @@
 #include <glog/logging.h>
 
 #include <process/time.hpp>
-
-namespace os {
-
-#ifdef _WINDOWS_
-
-inline struct tm* gmtime_r(const time_t *timep, struct tm *result)
-{
-  if (gmtime_s(result, timep))
-  {
-    return result;
-  }
-
-  return NULL;
-}
-
-#else // ​_WINDOWS_
-
-inline auto gmtime_r(const time_t *timep, struct tm *result) {
-  return ::gmtime_r(timep, result);
-}
-
-#endif // ​_WINDOWS_
-
-} // namespace os {
+#include <stout/os.hpp>
 
 namespace process {
 
