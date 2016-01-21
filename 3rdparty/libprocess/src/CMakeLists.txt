@@ -16,6 +16,13 @@
 
 # SOURCE FILES FOR THE PROCESS LIBRARY.
 #######################################
+
+if (NOT WIN32)
+  set(PROCESS_SRC
+  subprocess.cpp
+  )
+endif (NOT WIN32)
+
 set(PROCESS_SRC
   ${PROCESS_SRC}
   authenticator_manager.cpp
@@ -42,7 +49,6 @@ set(PROCESS_SRC
   process_reference.hpp
   reap.cpp
   socket.cpp
-  subprocess.cpp
   time.cpp
   timeseries.cpp
   )
