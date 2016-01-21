@@ -10,7 +10,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License
 
-#include <unistd.h>
+#ifdef __WINDOWS__
+
+#else
+  #include <unistd.h>
+#endif
 
 #include <mutex>
 
