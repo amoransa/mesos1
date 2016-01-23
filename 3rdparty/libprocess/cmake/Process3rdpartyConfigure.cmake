@@ -36,9 +36,12 @@ elseif (WIN32)
   # require 0.3.4.
   EXTERNAL("glog" "0.3.4" "${PROCESS_3RD_BIN}")
 
-  # NOTE: We expect cURL exists on Unix (usually pulled in with a package
-  # manager), but Windows has no package manager, so we have to go get it.
+  # NOTE: We expect cURL and zlib exist on Unix (usually pulled in with a
+  # package manager), but Windows has no package manager, so we have to go
+  # get it.
   EXTERNAL("curl" ${CURL_VERSION} "${PROCESS_3RD_BIN}")
+
+  EXTERNAL("zlib" ${ZLIB_VERSION} "${PROCESS_3RD_BIN}")
 endif (NOT WIN32)
 
 # Intermediate convenience variables for oddly-structured directories.
@@ -64,6 +67,8 @@ if (WIN32)
   set(LIBEVENT_INCLUDE_DIR
     ${LIBEVENT_ROOT}/include
     ${LIBEVENT_ROOT}-build/include)
+  set(ZLIB_INCLUDE_DIR     ${ZLIB_ROOT})
+  set(ZLIB_INCLUDE_DIR     ${ZLIB_INCLUDE_DIR} ${ZLIB_ROOT}-build)
 else (WIN32)
   set(GLOG_INCLUDE_DIR     ${GLOG_LIB_ROOT}/include)
   set(PROTOBUF_INCLUDE_DIR ${PROTOBUF_LIB_ROOT}/include)
@@ -79,6 +84,7 @@ if (WIN32)
   set(GLOG_LIB_DIR     ${GLOG_ROOT}-build/${CMAKE_BUILD_TYPE})
   set(LIBEVENT_LIB_DIR ${LIBEVENT_ROOT}-build/lib)
   set(PROTOBUF_LIB_DIR ${PROTOBUF_ROOT}/vsprojects/${CMAKE_BUILD_TYPE})
+  set(ZLIB_LIB_DIR     ${ZLIB_ROOT}-build/${CMAKE_BUILD_TYPE})
 else (WIN32)
   set(GLOG_LIB_DIR     ${GLOG_LIB_ROOT}/lib)
   set(LIBEVENT_LIB_DIR ${LIBEVENT_LIB_ROOT}/lib)
@@ -100,6 +106,9 @@ if (WIN32)
   # the library names are generated correctly.
   set(CURL_LFLAG     libcurl_a)
   set(PROTOBUF_LFLAG libprotobuf)
+
+  # Necessary to indicate what library to use for zlib for linking on Windows.
+  set(ZLIB_LFLAG     zlibd)
 else (WIN32)
   set(CURL_LFLAG     curl)
   set(DL_LFLAG       dl)

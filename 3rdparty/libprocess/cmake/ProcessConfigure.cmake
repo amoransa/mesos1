@@ -63,7 +63,11 @@ elseif (ENABLE_LIBEVENT)
 endif (NOT ENABLE_LIBEVENT)
 
 if (WIN32)
-  set(PROCESS_DEPENDENCIES ${PROCESS_DEPENDENCIES} ${CURL_TARGET})
+  set(PROCESS_DEPENDENCIES
+    ${PROCESS_DEPENDENCIES}
+    ${CURL_TARGET}
+    ${ZLIB_TARGET}
+    )
 endif (WIN32)
 
 # Define third-party include directories. Tells compiler toolchain where to get
@@ -90,9 +94,12 @@ if (HAS_GPERFTOOLS)
 endif (HAS_GPERFTOOLS)
 
 if (WIN32)
-  set(PROCESS_INCLUDE_DIRS ${PROCESS_INCLUDE_DIRS} ${CURL_INCLUDE_DIR})
+  set(PROCESS_INCLUDE_DIRS
+    ${PROCESS_INCLUDE_DIRS}
+    ${CURL_INCLUDE_DIR}
+    ${ZLIB_INCLUDE_DIR}
+    )
 endif (WIN32)
-
 # Define third-party lib install directories. Used to tell the compiler
 # toolchain where to find our third party libs (e.g., -L/path/to/glog on
 # Linux).
@@ -110,7 +117,11 @@ elseif (ENABLE_LIBEVENT)
 endif (NOT ENABLE_LIBEVENT)
 
 if (WIN32)
-  set(PROCESS_LIB_DIRS ${PROCESS_LIB_DIRS} ${CURL_LIB_DIR})
+  set(PROCESS_LIB_DIRS
+    ${PROCESS_LIB_DIRS}
+    ${CURL_LIB_DIR}
+    ${ZLIB_LIB_DIR}
+    )
 endif (WIN32)
 
 
@@ -134,7 +145,11 @@ elseif (ENABLE_LIBEVENT)
 endif (NOT ENABLE_LIBEVENT)
 
 if (WIN32)
-  set(PROCESS_LIBS ${PROCESS_LIBS} ${CURL_LFLAG})
+  set(PROCESS_LIBS
+    ${PROCESS_LIBS}
+    ${CURL_LFLAG}
+    ${ZLIB_LFLAG}
+    )
 elseif (NOT WIN32)
   find_package(ZLIB REQUIRED)
 
