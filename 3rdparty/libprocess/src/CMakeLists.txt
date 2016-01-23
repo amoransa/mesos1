@@ -17,11 +17,12 @@
 # SOURCE FILES FOR THE PROCESS LIBRARY.
 #######################################
 
-if (NOT WIN32)
+if (WIN32)
   set(PROCESS_SRC
   subprocess.cpp
+  windows/subprocess.cpp
   )
-endif (NOT WIN32)
+endif (WIN32)
 
 set(PROCESS_SRC
   ${PROCESS_SRC}
