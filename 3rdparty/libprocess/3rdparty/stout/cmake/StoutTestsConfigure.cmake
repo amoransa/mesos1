@@ -121,6 +121,7 @@ if (WIN32)
     ${STOUT_TEST_LIBS}
     ${CURL_LFLAG}
     ${ZLIB_LFLAG}
+    ws2_32
     )
 else (WIN32)
   set(STOUT_TEST_LIBS
