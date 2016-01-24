@@ -132,7 +132,6 @@ find_package(Threads REQUIRED)
 
 set(PROCESS_LIBS
   ${PROCESS_LIBS}
-  ${PROCESS_TARGET}
   ${GLOG_LFLAG}
   ${HTTP_PARSER_LFLAG}
   ${CMAKE_THREAD_LIBS_INIT}
@@ -149,6 +148,8 @@ if (WIN32)
     ${PROCESS_LIBS}
     ${CURL_LFLAG}
     ${ZLIB_LFLAG}
+    ws2_32
+    Mswsock
     )
 elseif (NOT WIN32)
   find_package(ZLIB REQUIRED)

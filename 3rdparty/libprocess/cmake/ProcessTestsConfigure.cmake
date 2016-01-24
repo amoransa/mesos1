@@ -119,6 +119,7 @@ if (WIN32)
   set(PROCESS_TEST_LIBS
     ${PROCESS_TEST_LIBS}
     ${ZLIB_LIB_DIR}
+    ws2_32
     )
 endif (WIN32)
 
