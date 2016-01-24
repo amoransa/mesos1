@@ -26,3 +26,19 @@ index c03ec05..747f47b 100644
 
  /* Compile with -DHTTP_PARSER_STRICT=0 to make less checks, but run
   * faster
+@@ -140,9 +132,15 @@
+ };
+
+
++#if defined(_WIN32) && !defined(__MINGW32__)
++__declspec(dllexport)
++#endif
+ void http_parser_init(http_parser *parser, enum http_parser_type type);
+
+
++#if defined(_WIN32) && !defined(__MINGW32__)
++__declspec(dllexport)
++#endif
+ size_t http_parser_execute(http_parser *parser,
+                            const http_parser_settings *settings,
+                            const char *data,
