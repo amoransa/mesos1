@@ -81,7 +81,7 @@ link_directories(${PROCESS_LIB_DIRS})
 
 # THE PROCESS LIBRARY (generates, e.g., libprocess.so, etc., on Linux).
 #######################################################################
-add_library(${PROCESS_TARGET} ${PROCESS_SRC})
+add_library(${PROCESS_TARGET} STATIC ${PROCESS_SRC})
 set_target_properties(
   ${PROCESS_TARGET} PROPERTIES
   VERSION ${PROCESS_PACKAGE_VERSION}
