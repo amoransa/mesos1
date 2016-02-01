@@ -176,14 +176,14 @@ set(LOGGING_SRC
 
 set(MASTER_SRC
   master/validation.cpp
-  )
+  master/detector.cpp
+   )
 
 if (NOT WIN32)
 set(MASTER_SRC
   ${MASTER_SRC}
   master/contender.cpp
   master/constants.cpp
-  master/detector.cpp
   master/flags.cpp
   master/http.cpp
   master/maintenance.cpp
@@ -230,9 +230,11 @@ set(AGENT_SRC
   slave/validation.cpp
   slave/monitor.cpp
   slave/containerizer/mesos/launch.cpp
-  slave/containerizer/containerizer.cpp
   slave/containerizer/fetcher.cpp
   slave/resource_estimator.cpp
+#  slave/containerizer/containerizer.cpp
+#  slave/containerizer/docker.cpp
+#  slave/containerizer/external_containerizer.cpp
   )
 
 if (NOT WIN32)
@@ -240,8 +242,6 @@ if (NOT WIN32)
     ${AGENT_SRC}
     slave/slave.cpp
     slave/containerizer/composing.cpp
-    slave/containerizer/docker.cpp
-    slave/containerizer/external_containerizer.cpp
     slave/containerizer/mesos/isolator.cpp
     slave/containerizer/mesos/launcher.cpp
     slave/containerizer/mesos/mount.cpp
