@@ -88,6 +88,9 @@
 #include "module/manager.hpp"
 
 #include "watcher/whitelist_watcher.hpp"
+#ifdef ACL
+#undef ACL
+#endif
 
 using std::list;
 using std::shared_ptr;
@@ -688,8 +691,12 @@ void Master::initialize()
   // Initialize the allocator.
   allocator->initialize(
       flags.allocation_interval,
-      defer(self(), &Master::offer, lambda::_1, lambda::_2),
-      defer(self(), &Master::inverseOffer, lambda::_1, lambda::_2),
+      defer(self(), &Master::offer, lambda::_1, lambda::_2).operator lambda::function<
+	  void(const FrameworkID&,
+		  const hashmap<SlaveID, Resources>&)>(),
+      defer(self(), &Master::inverseOffer, lambda::_1, lambda::_2).operator lambda::function<
+	  void(const FrameworkID&,
+		  const hashmap<SlaveID, UnavailableResources>&)>(),
       weights);
 
   // Parse the whitelist. Passing Allocator::updateWhitelist()

@@ -182,12 +182,6 @@ set(LOGGING_SRC
 set(MASTER_SRC
   master/validation.cpp
   master/detector.cpp
-  master/constants.cpp
-  )
-
-if (NOT WIN32)
-set(MASTER_SRC
-  ${MASTER_SRC}
   master/contender.cpp
   master/constants.cpp
   master/flags.cpp
@@ -205,7 +199,6 @@ set(MASTER_SRC
   master/allocator/mesos/hierarchical.cpp
   master/allocator/sorter/drf/sorter.cpp
   )
-endif (NOT WIN32)
 
 set(MODULE_SRC
   module/manager.cpp

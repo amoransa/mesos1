@@ -63,6 +63,6 @@ target_link_libraries(${AGENT_TARGET} ${PROCESS_AGENT_LIBS})
 
 # ADD BINARY DEPENDENCIES (tells CMake what to compile/build first).
 ####################################################################
-add_dependencies(${AGENT_TARGET} ${MESOS_TARGET})
+add_dependencies(${AGENT_TARGET} ${MESOS_FETCHER})
 
 add_subdirectory(containerizer)

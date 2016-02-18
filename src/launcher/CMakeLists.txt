@@ -58,5 +58,5 @@ target_link_libraries(${MESOS_FETCHER} ${MESOS_EXECUTOR_LIBS})
 
 # ADD BINARY DEPENDENCIES (tells CMake what to compile/build first).
 ####################################################################
-add_dependencies(${MESOS_EXECUTOR} ${AGENT_DEPENDENCIES})
-add_dependencies(${MESOS_FETCHER} ${AGENT_DEPENDENCIES})
+add_dependencies(${MESOS_EXECUTOR} ${MESOS_TARGET})
+add_dependencies(${MESOS_FETCHER} ${MESOS_EXECUTOR})

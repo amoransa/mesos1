@@ -17,6 +17,9 @@
 #ifndef __MESOS_AUTHORIZER_AUTHORIZER_HPP__
 #define __MESOS_AUTHORIZER_AUTHORIZER_HPP__
 
+#ifdef ACL
+#undef ACL
+#endif
 #include <iosfwd>
 #include <string>
 

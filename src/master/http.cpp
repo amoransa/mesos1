@@ -71,6 +71,10 @@
 #include "mesos/mesos.hpp"
 #include "mesos/resources.hpp"
 
+#ifdef ACL
+#undef ACL
+#endif
+
 using google::protobuf::RepeatedPtrField;
 
 using process::Clock;
